@@ -5,12 +5,79 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/5faf8e65b7.js" crossorigin="anonymous"></script>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <header>
+      <nav class="navbar navbar-light">
+        <div class="container-fluid">
+          <div class="row flex-nowrap">
+            <a class="navbar-brand col-3 p-3" href = "/">
+              <button type="button" class="btn btn-outline-dark btn-lg">LOGO</button>
+            </a>
+
+              <%if admin_signed_in? %>
+                <div class="nav-link text-nowrap" href="/admin/items">
+                  <botton type="button" class="btn btn-outline-secondary btn-sm">商品一覧</botton>
+                </div>
+
+                <div class="nav-link text-nowrap" href="/admin/customers">
+                  <botton type="button" class="btn btn-outline-secondary btn-sm">会員一覧</botton>
+                </div>
+
+                <div class="nav-link text-nowrap" href="/admin/orders">
+                  <botton type="button" class="btn btn-outline-secondary btn-sm">注文履歴一覧</botton>
+                </div>
+
+                <div class="nav-link text-nowrap" rel="nofollow" data-method="delete" href="/admin/sign_out">
+                  <botton type="button" class="btn btn-outline-secondary btn-sm">ログアウト</botton>
+                </div>
+
+
+            <% elsif customer_signed_in? %>
+              <a class="col-1 col-offset-5 nav-link text-light" href="/customers/show">
+                <botton type="button" class="btn btn-outline-secondary btn-sm">マイページ</botton>
+              </a>
+
+              <a class="col-1 nav-link text-light" href="/items">
+                <botton type="button" class="btn btn-outline-secondary btn-sm">商品一覧</botton>
+              </a>
+
+              <a class="col-1 nav-link text-light" href="/cart_items">
+                <botton type="button" class="btn btn-outline-secondary btn-sm">カート</botton>
+              </a>
+
+              <a class="col-1 nav-link text-light" rel="nofollow" data-method="delete" href="/customers/sign_out">
+                <botton type="button" class="btn btn-outline-secondary btn-sm">ログアウト</botton>
+              </a>
+
+
+            <% else %>
+              <a class="col-1 col-offset-5 nav-link text-light" href="/about">
+                <botton type="button" class="btn btn-outline-secondary btn-sm">About</botton>
+              </a>
+
+              <a class="col-1 nav-link text-light" href="/items">
+                <botton type="button" class="btn btn-outline-secondary btn-sm">商品一覧</botton>
+              </a>
+
+              <a class="col-1 nav-link text-light" href="/customers/sign-up">
+                <botton type="button" class="btn btn-outline-secondary btn-sm">新規登録</botton>
+              </a>
+
+              <a class="col-1 nav-link text-light" href="/customers/sign_in">
+                <botton type="button" class="btn btn-outline-secondary btn-sm">ログイン</botton>
+              </a>
+            <% end %>
+          </div>
+        </div>
+      </nav>
+    </header>
     <%= yield %>
   </body>
 </html>
