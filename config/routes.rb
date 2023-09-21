@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  namespace :public do
+    get 'items/index'
+    get 'items/show'
+  end
     root to: 'public/homes#top'
     get '/about' => 'public/homes#about', as:'about'
 
@@ -39,7 +43,8 @@ Rails.application.routes.draw do
     patch '/customers/withdraw', to:'public/customers#withdraw'
 
 
-    resources :public_items, only: [:index, :show]
+    get '/items', to:'public/items#index'
+    get '/items/:id', to:'public/items#show'
 
 
   devise_for :customers, skip: [:passwords], controllers: {
