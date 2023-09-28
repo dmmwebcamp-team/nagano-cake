@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
   namespace :public do
-    get 'items/index'
-    get 'items/show'
+    get '/items' => 'public/items#index'
+    get '/items/:id', to: 'public/items#show', as: 'item'
   end
     root to: 'public/homes#top'
     get '/about' => 'public/homes#about', as:'about'

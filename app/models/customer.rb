@@ -3,4 +3,16 @@ class Customer < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  def active_for_authentication?
+    super && (is_active == true)
+  end
+
+  has_many :cart_items, dependent: :destroy
+  has_many :orders, dependent: :destroy
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
 end

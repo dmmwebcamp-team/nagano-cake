@@ -20,22 +20,22 @@
             <a class="navbar-brand col-3 p-3" href = "/">
               <button type="button" class="btn btn-outline-dark btn-lg">LOGO</button>
             </a>
-            <div class="col-md-auto"></div>
+            <div class="col-3"></div>
 
               <%if admin_signed_in? %>
-                <a class="nav-link text-nowrap" href="/admin/items">
+                <a class="col nav-link text-nowrap" href="/admin/items">
                   <botton type="button" class="btn btn-outline-secondary btn-sm">商品一覧</botton>
                 </a>
 
-                <a class="nav-link text-nowrap" href="/admin/customers">
+                <a class="col nav-link text-nowrap" href="/admin/customers">
                   <botton type="button" class="btn btn-outline-secondary btn-sm">会員一覧</botton>
                 </a>
 
-                <a class="nav-link text-nowrap" href="/admin/orders">
+                <a class="col nav-link text-nowrap" href="/admin/orders">
                   <botton type="button" class="btn btn-outline-secondary btn-sm">注文履歴一覧</botton>
                 </a>
 
-                <a class="nav-link text-nowrap" rel="nofollow" data-method="delete" href="/admin/sign_out">
+                <a class="col nav-link text-nowrap" rel="nofollow" data-method="delete" href="/admin/sign_out">
                   <botton type="button" class="btn btn-outline-secondary btn-sm">ログアウト</botton>
                 </a>
 
