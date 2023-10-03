@@ -1,6 +1,11 @@
 class CartItem < ApplicationRecord
 
-  belongs_to :customers, foreign_key: :customer_id
-  belongs_to :items, foreign_key: :item_id
+  belongs_to :customer, foreign_key: :customer_id
+  belongs_to :item, foreign_key: :item_id
+
+
+  def subtotal
+    item.price_with_tax * amount
+  end
 
 end

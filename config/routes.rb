@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
 
-  namespace :public do
+
     get '/items' => 'public/items#index'
     get '/items/:id', to: 'public/items#show', as: 'item'
-  end
+
     root to: 'public/homes#top'
     get '/about' => 'public/homes#about', as:'about'
 
@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   end
   namespace :admin do
     resources :customers, only: [:index, :show, :edit, :update]
+    patch 'customers/:id', to:'admin/customers#update', as:'customers_update'
   end
   namespace :admin do
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
@@ -29,10 +30,10 @@ Rails.application.routes.draw do
     get '/orders/:id', to:'public/orders#show'
 
 
-    get '/cart_items', to:'public/cart_items#show'
-    patch '/cart_items/:id', to:'public/cart_items#update'
-    delete '/cart_items/:id', to:'public/cart_items#destroy'
-    delete '/cart_items/destroy_all', to:'public/cart_items#destroy_all'
+    get '/cart_items', to:'public/cart_items#index'
+    patch '/cart_items/:id', to:'public/cart_items#update', as:'cart_item_update'
+    delete '/cart_items/destroy_all', to: 'public/cart_items#destroy_all', as: 'cart_items_destroy_all'
+    delete '/cart_items/:id', to:'public/cart_items#destroy', as:'cart_item_destroy'
     post '/cart_items', to:'public/cart_items#create'
 
 

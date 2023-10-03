@@ -1,2 +1,25 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<div class="container">
+  <div class="d-flex align-items-center border border-dark m-5 py-4 w-50 ">
+    <span>
+      ようこそ、ながのCAKEへ!<br>
+      このサイトは、ケーキ販売のECサイトになります。<br>
+      会員でない方も商品の閲覧はできますが、<br>
+      購入には会員登録が必要になります。
+    </span>
+  </div>
+  <h4>新着商品</h4>
+  <div class="row">
+    <% @new_items.each do |item| %>
+      <div class="col-md-3">
+        <div class="product d-flex flex-column">
+          <%= image_tag item.image, class: "product-image" %>
+          <p class="product-name "><%= link_to item.name, item %></p>
+          <p class="product-price">¥<%= item.price.to_i.to_s(:delimited) %>（税込）</p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <a class="d-flex justify-content-end">
+    <%= link_to "全ての商品を見る>", items_path %>
+  </a>
+</div>

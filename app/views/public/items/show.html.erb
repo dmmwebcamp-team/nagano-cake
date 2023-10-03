@@ -9,7 +9,7 @@
       <p class="product-name">¥<%= @item.price_with_tax.to_i.to_s(:delimited)  %>（税込）</p>
       <%= form_with model: @cart_item, html: { class: "form-inline" } do |f| %>
         <div class="form-group">
-          <%= f.select :quantity, (1..10).to_a, { include_blank: "個数選択" }, { class: "form-control" } %>
+          <%= f.select :amount, (1..10).to_a, { include_blank: "個数選択" }, { class: "form-control" } %>
         </div>
         <div class="form-group">
           <%= f.hidden_field :item_id, value: @item.id %>
