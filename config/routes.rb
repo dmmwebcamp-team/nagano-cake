@@ -23,11 +23,11 @@ Rails.application.routes.draw do
   end
 
     get '/orders/new', to:'public/orders#new'
-    post '/orders/confirm', to:'public/ordres#confirm'
+    post '/orders/confirm', to:'public/orders#confirm'
     get '/orders/complete', to:'public/orders#complete'
     post '/orders', to:'public/orders#create'
     get '/orders', to:'public/orders#index'
-    get '/orders/:id', to:'public/orders#show'
+    get '/orders/:id', to:'public/orders#show', as: 'order'
 
 
     get '/cart_items', to:'public/cart_items#index'
