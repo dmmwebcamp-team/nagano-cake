@@ -1,0 +1,58 @@
+<div class="container">
+  <span class="bg-light m-5">会員情報編集</span>
+  <% if flash[:error].present? %>
+    <ul class="errors alert alert-danger">
+      <% flash[:error].each do |e| %>
+        <li><%= e %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <%= form_with model: @customer, url: customers_update_path do |f| %>
+  <div class="row ml-3 mb-1 pt-4 align-items-center">
+    <div class="col-3">
+      <label class="col-form-label">氏名</label>
+    </div>
+      <a class="col-4"><%= f.text_field :first_name %></a>
+      <a class="col-4"><%= f.text_field :last_name %></a>
+  </div>
+  <div class="row ml-3 mb-1 pt-4 align-items-center">
+    <div class="col-3">
+      <label class="col-form-label">フリガナ</label>
+    </div>
+      <a class="col-4"><%= f.text_field :first_name_kana %></a>
+      <a class="col-4"><%= f.text_field :last_name_kana %></a>
+  </div>
+  <div class="row ml-3 mb-1 pt-4 align-items-center">
+    <div class="col-3">
+      <label class="col-form-label">郵便番号</label>
+    </div>
+      <a class="col-4"><%= f.text_field :postal_code %></a>
+  </div>
+   <div class="row ml-3 mb-1 pt-4 align-items-center">
+    <div class="col-3">
+      <label class="col-form-label">住所</label>
+    </div>
+      <a class="col-7"><%= f.text_field :address %></a>
+  </div>
+  <div class="row ml-3 mb-1 pt-4 align-items-center">
+    <div class="col-3">
+      <label class="col-form-label">電話番号</label>
+    </div>
+      <a class="col-4"><%= f.text_field :telephone_number %></a>
+  </div>
+  <div class="row ml-3 mb-1 pt-4 align-items-center">
+    <div class="col-3">
+      <label class="col-form-label">メールアドレス</label>
+    </div>
+      <a class="col-4"><%= f.text_field :email %></a>
+  </div>
+  <div class="row ml-3 mb-1 pt-4 align-items-center">
+    <div class="form-group col-4 offset-3">
+      <%= f.submit "編集内容を保存", class:"btn btn-success" %>
+    </div>
+    <div class="form-group col-3 offset-2">
+      <a><%= link_to "退会する", customers_unsubscribe_path, class:"btn btn-danger" %></a>
+    </div>
+  </div>
+  <% end %>
+</div>

@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <%= image_tag @item.image, class: "product-image", style: 'width: 260px; height: 220px;' %>
+    </div>
+    <div class="col">
+      <p class="product-name"><%= @item.name %></p>
+      <p class="product-name"><%= @item.introduction %></p>
+      <p class="product-name">¥<%= @item.price_with_tax.to_i.to_s(:delimited)  %>（税込）</p>
+      <%= form_with model: @cart_item, html: { class: "form-inline" } do |f| %>
+        <% if flash[:error].present? %>
+          <ul class="errors alert alert-danger">
+            <% flash[:error].each do |e| %>
+              <li><%= e %></li>
+            <% end %>
+          </ul>
+        <% end %>
+        <div class="form-group">
+          <%= f.select :amount, (1..10).to_a, { include_blank: "個数選択" }, { class: "form-control" } %>
+        </div>
+        <div class="form-group">
+          <%= f.hidden_field :item_id, value: @item.id %>
+        </div>
+        <div class="form-group ml-4">
+          <%= f.submit "カートに入れる", class: "btn btn-success" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

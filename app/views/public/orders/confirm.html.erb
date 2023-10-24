@@ -1,0 +1,56 @@
+<div class="container">
+  <span class="bg-light ml-5">注文情報確認</span>
+  <div class="row">
+    <table class="table table-bordered mx-5 col-7">
+      <thead class="table-active">
+        <th>商品名</th>
+        <th>単価（税込）</th>
+        <th>数量</th>
+        <th>小計</th>
+      </thead>
+      <tbody>
+        <% @order_items.each do |order_item| %>
+          <tr>
+            <td><%= order_item.item.name %></td>
+            <td><%= number_with_delimiter(order_item.purchase_price) %></td>
+            <td><%= order_item.purchase_amount %></td>
+            <td><%= number_with_delimiter(order_item.subtotal.to_i) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <table class="table table-bordered col">
+      <tr>
+        <th class="table-active">送料</th>
+        <td><%= @order.postage %></td>
+      </tr>
+      <tr>
+        <th class="table-active">商品合計</th>
+        <td><%= number_with_delimiter(@total_price) %></td>
+      </tr>
+      <tr>
+        <th class="table-active">請求金額</th>
+        <td><%= number_with_delimiter(@order.payment) %></td>
+      </tr>
+    </table>
+  </div>
+  <div class="row m-3">
+    <strong class="mr-3">支払い方法</strong>
+    <%= @order.payment_method_i18n %>
+  </div>
+  <div class="row m-3">
+    <strong class="mr-3">お届け先</strong>
+    〒<%= @order.attention_postal_code %><%= @order.attention_address %><br><%= @order.delivery_name %>
+  </div>
+  <div class="d-flex justify-content-center mt-4">
+    <%= form_with model: @order, url: orders_path, method: :post, remote: true do |f| %>
+      <%= f.hidden_field :attention_postal_code, value: @order.attention_postal_code %>
+      <%= f.hidden_field :attention_address, value: @order.attention_address %>
+      <%= f.hidden_field :delivery_name, value: @order.delivery_name %>
+      <%= f.hidden_field :postage, value: @order.postage %>
+      <%= f.hidden_field :payment_method, value: @order.payment_method %>
+      <%= f.hidden_field :payment, value: @order.payment %>
+      <%= f.submit "注文を確定する", class: "btn btn-success" %>
+    <% end %>
+  </div>
+</div>

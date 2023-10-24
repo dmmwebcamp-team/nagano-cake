@@ -1,0 +1,65 @@
+<div class="container">
+  <span class="bg-light ml-5">注文履歴詳細</span>
+  <table class="table table-borderless">
+    <tr>
+      <th>購入者</th>
+      <td>
+        <%= link_to admin_customer_path(@customer_id), class: "text-dark" do %>
+          <%= @order.delivery_name %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th>注文日</th>
+      <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+    </tr>
+    <tr>
+      <th>配送先</th>
+      <td>〒<%= @order.attention_postal_code %> <%= @order.attention_address %><br><%= @order.delivery_name %></td>
+    </tr>
+    <tr>
+      <th>支払方法</th>
+      <td><%= @order.payment_method_i18n %></td>
+    </tr>
+  </table>
+  <div class="row mt-5">
+    <div class="col-8">
+      <table class="table table-borderless">
+        <thead class="table-active">
+          <tr>
+            <th>商品名</th>
+            <th>単価（税込）</th>
+            <th>数量</th>
+            <th>小計</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @order_items.each do |order_item| %>
+          <tr>
+            <td><%= order_item.item.name %></td>
+            <td><%= number_with_delimiter(order_item.purchase_price) %></td>
+            <td><%= order_item.purchase_amount %></td>
+            <td><%= number_with_delimiter(order_item.subtotal.to_i) %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col">
+      <table class="table table-borderless">
+        <tr>
+          <th>商品合計</th>
+          <td><%= number_with_delimiter(@total_price) %>円</td>
+        </tr>
+        <tr>
+          <th>送料</th>
+          <td><%= @order.postage %>円</td>
+        </tr>
+        <tr>
+          <th>請求金額合計</th>
+          <td><%= number_with_delimiter(@order.payment) %>円</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

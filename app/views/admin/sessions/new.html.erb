@@ -1,0 +1,42 @@
+<div class="container">
+  <% if resource.errors.any? || (request.env['warden.options'] && request.env['warden.options'][:action] == 'unauthenticated') %>
+    <div class="alert alert-danger">
+      <%= resource.errors.count + (request.env['warden.options'] && request.env['warden.options'][:action] == 'unauthenticated' ? 1 : 0) %> 件のエラーが発生しました
+      <ul>
+        <% resource.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        <% if request.env['warden.options'] && request.env['warden.options'][:action] == 'unauthenticated' %>
+          <li>メールアドレスまたはパスワードが正しくありません。</li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <span class="bg-light">管理者ログイン</span>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="row ml-5 mb-2 align-items-center">
+        <div class="col-4">
+          <label for="InputEmail" class="col-form-label">メールアドレス</label>
+        </div>
+        <div class="col-8">
+          <input type="email" class="form-control" name="admin[email]" id="InputEmail">
+        </div>
+      </div>
+
+      <div class="row ml-5 mb-2 align-items-center">
+        <div class="col-4">
+          <label for="InputPassword" class="col-form-label">パスワード</label>
+        </div>
+        <div class="col-8">
+          <input type="password" class="form-control" name="admin[password]" id="InputPassword">
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <input class="btn btn-primary" type="submit" value="ログイン">
+      </div>
+    <% end %>
+
+  <%= render "admin/shared/links" %>
+
+</div>

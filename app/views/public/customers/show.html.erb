@@ -1,0 +1,19 @@
+<div class="container">
+  <span class="bg-light m-5 fs-5">マイページ</span>
+  <div class="row p-4">
+    <strong>登録情報</strong>
+    <a href="/customers/information/edit" class="btn btn-success ml-3" role="button">編集する</a>
+  </div>
+  <table class="table table-bordered">
+    <tr><th class="table-active fw-normal">氏名</th><td><%= @customer.first_name %><%= @customer.last_name %></td></tr>
+    <tr><th class="table-active">カナ</th><td><%= @customer.first_name_kana %><%= @customer.last_name_kana %></td></tr>
+    <tr><th class="table-active">郵便番号</th><td><%= @customer.postal_code %></td></tr>
+    <tr><th class="table-active">住所</th><td><%= @customer.address %></td></tr>
+    <tr><th class="table-active">電話番号</th><td><%= @customer.telephone_number %></td></tr>
+    <tr><th class="table-active">メールアドレス</th><td><%= @customer.email %></td></tr>
+  </table>
+  <div class="row p-4">
+    <strong>注文履歴</strong>
+    <a href="/orders" class="btn btn-primary ml-3" role="button">一覧を見る</a>
+  </div>
+</div>

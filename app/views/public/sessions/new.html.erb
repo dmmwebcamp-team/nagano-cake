@@ -1,0 +1,32 @@
+<div class="container">
+  <span class="bg-light">ログイン</span>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="row ml-5 mb-2 align-items-center">
+    <div class="col-4">
+      <label for="InputEmail" class="col-form-label">メールアドレス</label>
+    </div>
+    <div class="col-8">
+      <input type="email" class="form-control" name="customer[email]" id="InputEmail">
+    </div>
+  </div>
+
+  <div class="row ml-5 mb-2 align-items-center">
+    <div class="col-4">
+      <label for="InputPassword" class="col-form-label">パスワード</label>
+    </div>
+    <div class="col-8">
+      <input type="password" class="form-control" name="customer[password]" id="InputPassword">
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <input class="btn btn-primary" type="submit" value="ログイン">
+  </div>
+  <% end %>
+
+  <span class="bg-light">会員登録がお済みでない方</span>
+  <div class="row ml-2 mt-2 align-items-center">
+    <a class="nav-link mx-2" href="/customers/sign_up">こちら</a>
+    から新規登録を行なってください。
+  </div>
+</div>

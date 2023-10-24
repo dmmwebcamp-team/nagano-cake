@@ -1,0 +1,51 @@
+<div class="container">
+  <span class="bg-light m-5">商品詳細</span>
+  <% if @item.errors.any? %>
+    <div class="alert alert-danger">
+      <%= @item.errors.count %>件のエラーが発生しました
+      <ul>
+        <% @item.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="row mt-5">
+    <div class="col">
+      <%= image_tag @item.image, style: 'width: 260px; height: 220px;' %>
+    </div>
+    <div class="col d-flex flex-column bd-highlight">
+      <div class="row ml-3 mb-2 align-items-center">
+        <div class="col-4">
+          <label class="col-form-label">商品名</label>
+        </div>
+        <div class="col-5">
+          <%= @item.name %>
+        </div>
+      </div>
+      <div class="row ml-3 mb-2 align-items-center">
+        <div class="col-4">
+          <label class="col-form-label">商品説明</label>
+        </div>
+        <div class="col-5">
+          <%= @item.introduction %>
+        </div>
+      </div>
+      <div class="row ml-3 mb-2 align-items-center">
+        <div class="col-4">
+          <label class="col-form-label">税込価格<br>(税抜価格)</label>
+        </div>
+        <div class="col-5">
+          <%= @item.price_with_tax.to_i.to_s(:delimited)  %> (<%= @item.price.to_s(:delimited)  %>)円
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="/admin/items/<%= @item.id %>/edit" class="btn btn-success ml-5" role="button">編集する</a>
+</div>
+
+
+
+
+
+
