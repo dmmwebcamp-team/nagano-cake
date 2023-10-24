@@ -1,4 +1,5 @@
 class Public::CartItemsController < ApplicationController
+  before_action :authenticate_customer!
   def index
     @cart_items = CartItem.all
     @total_price = @cart_items.sum{ |cart_item| cart_item.subtotal.to_i }
@@ -14,8 +15,12 @@ class Public::CartItemsController < ApplicationController
       @cart_item.customer_id = current_customer.id
     end
 
-    @cart_item.save
-    redirect_to cart_items_path
+    if @cart_item.save
+      redirect_to cart_items_path
+    else
+      item = Item.find(cart_item_params[:item_id])
+      redirect_to item_path(item.id), flash: { error: @cart_item.errors.full_messages }
+    end
   end
 
   def update

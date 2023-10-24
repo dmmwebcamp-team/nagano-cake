@@ -1,4 +1,5 @@
 class Public::CustomersController < ApplicationController
+  before_action :authenticate_customer!
   def show
     @customer = current_customer
   end
@@ -9,8 +10,12 @@ class Public::CustomersController < ApplicationController
 
   def update
     @customer = current_customer
-    @customer.update(customer_params)
-    redirect_to customers_show_path
+    if @customer.update(customer_params)
+      redirect_to customers_show_path
+    else
+      flash[:error] = @customer.errors.full_messages
+      redirect_to customers_information_edit_path
+    end
   end
 
   def unsubscribe
@@ -18,7 +23,7 @@ class Public::CustomersController < ApplicationController
 
   def withdraw
     @customer = current_customer
-    @customer = update(is_active: false)
+    @customer.update(is_active: false)
     reset_session
     redirect_to root_path
   end
@@ -26,6 +31,6 @@ class Public::CustomersController < ApplicationController
   private
 
   def customer_params
-    params.require(:customer).permit(:first_name, :last_name, :first_name_kana, :last_name_kana, :postal_code, :address, :telephone_number)
+    params.require(:customer).permit(:first_name, :last_name, :first_name_kana, :last_name_kana, :postal_code, :address, :telephone_number, :email)
   end
 end

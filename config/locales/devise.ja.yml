@@ -102,6 +102,7 @@ ja:
         we_need_your_current_password_to_confirm_your_changes: 変更を反映するには現在のパスワードを入力してください
       new:
         sign_up: アカウント登録
+      password_mismatch: パスワードとパスワード確認の入力が一致しません
       signed_up: アカウント登録が完了しました。
       signed_up_but_inactive: ログインするためには、アカウントを有効化してください。
       signed_up_but_locked: アカウントがロックされているためログインできません。
@@ -141,3 +142,28 @@ ja:
       not_saved:
         one: エラーが発生したため %{resource} は保存されませんでした。
         other: "%{count} 件のエラーが発生したため %{resource} は保存されませんでした。"
+    models:
+        customer:
+          attributes:
+            email:
+              blank: "メールアドレスを入力してください"
+              taken: "このメールアドレスは既に登録されています"
+            password:
+              blank: "パスワードを入力してください"
+              too_short: "パスワードは6文字以上で入力してください"
+            first_name:
+              blank: "名前を入力してください"
+            last_name:
+              blank: "名字を入力してください"
+            first_name_kana:
+              blank: "フリガナ（セイ）を入力してください"
+            last_name_kana:
+              blank: "フリガナ（メイ）を入力してください"
+            postal_code:
+              blank: "郵便番号を入力してください"
+            address:
+              blank: "住所を入力してください"
+            telephone_number:
+              blank: "電話番号を入力してください"
+            password_confirmation:
+              blank: "パスワード（確認）を入力してください"

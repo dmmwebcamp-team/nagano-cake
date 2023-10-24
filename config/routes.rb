@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
 
-    get '/items' => 'public/items#index'
+    get '/items' => 'public/items#index', as: 'items'
     get '/items/:id', to: 'public/items#show', as: 'item'
 
     root to: 'public/homes#top'
@@ -39,9 +39,9 @@ Rails.application.routes.draw do
 
     get '/customers/show', to:'public/customers#show'
     get '/customers/information/edit', to:'public/customers#edit'
+    patch '/customers/withdraw', to:'public/customers#withdraw'
     patch '/customers/update', to:'public/customers#update'
     get '/customers/unsubscribe', to:'public/customers#unsubscribe'
-    patch '/customers/withdraw', to:'public/customers#withdraw'
 
 
     get '/items', to:'public/items#index'

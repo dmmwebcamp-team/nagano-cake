@@ -1,8 +1,18 @@
 <div class="container">
   <span class="bg-light m-5">商品詳細</span>
+  <% if @item.errors.any? %>
+    <div class="alert alert-danger">
+      <%= @item.errors.count %>件のエラーが発生しました
+      <ul>
+        <% @item.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div class="row mt-5">
     <div class="col">
-      <%= image_tag @item.image %>
+      <%= image_tag @item.image, style: 'width: 260px; height: 220px;' %>
     </div>
     <div class="col d-flex flex-column bd-highlight">
       <div class="row ml-3 mb-2 align-items-center">

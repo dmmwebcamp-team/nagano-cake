@@ -7,6 +7,7 @@
       <%= link_to "カートを空にする", cart_items_destroy_all_path, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm" %>
     </div>
   </div>
+  <% if @cart_items.any? %>
   <table class="table table-bordered mx-5">
     <thead class="table-active">
       <th>商品名</th>
@@ -52,4 +53,10 @@
   <div class="d-flex justify-content-center mt-4">
     <%= link_to "情報入力に進む", orders_new_path, class: "btn btn-success" %>
   </div>
+  <% else %>
+  <p>カートにアイテムがありません。</p>
+    <div class="col ml-5">
+      <%= link_to "買い物を続ける", root_path, class: "btn btn-primary" %>
+    </div>
+  <% end %>
 </div>

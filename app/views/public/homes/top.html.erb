@@ -12,7 +12,9 @@
     <% @new_items.each do |item| %>
       <div class="col-md-3">
         <div class="product d-flex flex-column">
-          <%= image_tag item.image, class: "product-image" %>
+          <%= link_to item do %>
+            <%= image_tag item.image, class: "product-image, img-fluid product-image" %>
+          <% end %>
           <p class="product-name "><%= link_to item.name, item %></p>
           <p class="product-price">¥<%= item.price.to_i.to_s(:delimited) %>（税込）</p>
         </div>

@@ -1,5 +1,17 @@
 <div class="container">
-
+  <% if resource.errors.any? || (request.env['warden.options'] && request.env['warden.options'][:action] == 'unauthenticated') %>
+    <div class="alert alert-danger">
+      <%= resource.errors.count + (request.env['warden.options'] && request.env['warden.options'][:action] == 'unauthenticated' ? 1 : 0) %> 件のエラーが発生しました
+      <ul>
+        <% resource.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        <% if request.env['warden.options'] && request.env['warden.options'][:action] == 'unauthenticated' %>
+          <li>メールアドレスまたはパスワードが正しくありません。</li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
     <span class="bg-light">管理者ログイン</span>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="row ml-5 mb-2 align-items-center">
